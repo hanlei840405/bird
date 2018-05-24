@@ -12,6 +12,6 @@ import 'quasar-framework/dist/quasar.ie.polyfills'
 
 
 import Vue from 'vue'
-import Quasar, {QLayout,QLayoutHeader,QLayoutDrawer,QPageContainer,QPage,QToolbar,QToolbarTitle,QBtn,QIcon,QList,QListHeader,QItem,QItemMain,QItemSeparator,QItemSide,QItemTile,QCard,QCardTitle,QCardMain,QCardMedia,QCardSeparator,QCardActions,QField,QInput,QCollapsible,QTree,QBreadcrumbs,QBreadcrumbsEl,QPageSticky,QTable,QTh,QTr,QTd,QTableColumns,QSearch,Ripple,Notify} from 'quasar'
+import Quasar, {QLayout,QLayoutHeader,QLayoutDrawer,QPageContainer,QPage,QToolbar,QToolbarTitle,QBtn,QIcon,QList,QListHeader,QItem,QItemMain,QItemSeparator,QItemSide,QItemTile,QCard,QCardTitle,QCardMain,QCardMedia,QCardSeparator,QCardActions,QField,QInput,QCollapsible,QTree,QBreadcrumbs,QBreadcrumbsEl,QPageSticky,QTable,QTh,QTr,QTd,QTableColumns,QSearch,QModal,QModalLayout,Ripple,CloseOverlay,Notify} from 'quasar'
 
-Vue.use(Quasar, {components: {QLayout,QLayoutHeader,QLayoutDrawer,QPageContainer,QPage,QToolbar,QToolbarTitle,QBtn,QIcon,QList,QListHeader,QItem,QItemMain,QItemSeparator,QItemSide,QItemTile,QCard,QCardTitle,QCardMain,QCardMedia,QCardSeparator,QCardActions,QField,QInput,QCollapsible,QTree,QBreadcrumbs,QBreadcrumbsEl,QPageSticky,QTable,QTh,QTr,QTd,QTableColumns,QSearch},directives: {Ripple},plugins: {Notify}})
+Vue.use(Quasar, {components: {QLayout,QLayoutHeader,QLayoutDrawer,QPageContainer,QPage,QToolbar,QToolbarTitle,QBtn,QIcon,QList,QListHeader,QItem,QItemMain,QItemSeparator,QItemSide,QItemTile,QCard,QCardTitle,QCardMain,QCardMedia,QCardSeparator,QCardActions,QField,QInput,QCollapsible,QTree,QBreadcrumbs,QBreadcrumbsEl,QPageSticky,QTable,QTh,QTr,QTd,QTableColumns,QSearch,QModal,QModalLayout},directives: {Ripple,CloseOverlay},plugins: {Notify}})

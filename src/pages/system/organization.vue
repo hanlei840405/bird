@@ -24,13 +24,49 @@
       >
         <template slot="top-right" slot-scope="props">
           <q-search hide-underline v-model="organizationTable.filter" />
+          <q-btn color="negative" flat round delete icon="delete" />
+          <q-btn color="primary" flat round delete icon="add" @click="add()" />
         </template>
         <q-td slot="body-cell-action" slot-scope="props" :props="props">
-          <q-btn icon="edit" @click="on_edit(props)" />
-          <q-btn icon="delete" @click="on_edit(props)" />
+          <q-btn icon="edit" size="sm" @click="edit(props.row)" flat push/>
+          <q-btn icon="delete" size="sm" @click="edit(props.row)" flat push/>
         </q-td>
       </q-table>
     </div>
+    <q-modal v-model="modal.opened" :content-css="{minWidth: '80vw', minHeight: '80vh'}">
+      <q-modal-layout>
+        <q-toolbar slot="header">
+          <q-btn
+            flat
+            round
+            dense
+            v-close-overlay
+            icon="keyboard_arrow_left"
+          />
+          <q-toolbar-title>
+            Header
+          </q-toolbar-title>
+        </q-toolbar>
+
+        <q-toolbar slot="footer">
+          <q-toolbar-title>
+            Footer
+          </q-toolbar-title>
+        </q-toolbar>
+
+        <div class="layout-padding">
+          <h1>Modal</h1>
+
+          <q-btn
+            color="primary"
+            v-close-overlay
+            label="Close"
+          />
+
+          <p>This is a Modal presenting a Layout.</p>
+        </div>
+      </q-modal-layout>
+    </q-modal>
   </q-page>
 </template>
 
@@ -73,6 +109,9 @@ export default {
         { name: 'status', label: '状态', field: 'status', format: val => val ? '正常' : '停用' },
         { name: 'action', label: '操作' }
       ]
+    },
+    modal: {
+      opened: false
     }
   }),
   methods: {
@@ -96,8 +135,12 @@ export default {
         done(array)
       })
     },
-    on_edit ({cell}) {
-      console.log(cell)
+    add () {
+      this.modal.opened = true
+      debugger
+    },
+    edit (row) {
+      console.log(row)
     },
     request ({ pagination, filter, parentId }) {
       this.$axios.get('api-system/organization/page', {

@@ -8,9 +8,10 @@ export default {
   methods: {
     login () {
       this.$axios.post('api-system/login',{'username': this.username, 'password': this.password}).then(res => {
-        var authorization = res.headers.authorization
-        if (authorization) {
-          sessionStorage.setItem('Authorization', authorization)
+        var token = res.headers.token
+        debugger
+        if (token) {
+          sessionStorage.setItem('token', token)
           this.$router.push('/')
         }else {
           this.$q.notify({

@@ -43,7 +43,7 @@ module.exports = function (ctx) {
       proxy: {
         // 将所有以/api开头的请求代理到jsonplaceholder
         '/api-system': {
-          target: 'http://127.0.0.1:8201',
+          target: 'http://192.168.1.106:8111/system',
           changeOrigin: true,
           pathRewrite: {
             '^/api-system': ''
@@ -92,10 +92,13 @@ module.exports = function (ctx) {
         'QTr',
         'QTd',
         'QTableColumns',
-        'QSearch'
+        'QSearch',
+        'QModal',
+        'QModalLayout'
       ],
       directives: [
-        'Ripple'
+        'Ripple',
+        'CloseOverlay'
       ],
       // Quasar plugins
       plugins: [

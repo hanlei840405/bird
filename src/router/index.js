@@ -24,9 +24,9 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.fullPath !== '/login') {
-    let token = sessionStorage.getItem('Authorization')
+    let token = sessionStorage.getItem('token')
     if (token) {
-      axios.get('/api-system/state', {headers: {'Authorization': token}}).then((response) => {
+      axios.get('/api-system/state', {headers: {'token': token}}).then((response) => {
         console.log(response)
         if (response.data) {
           next()

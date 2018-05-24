@@ -71,6 +71,7 @@ export default {
     openURL
   },
   mounted () {
+    debugger
     this.$axios.get('api-system/menu/menu').then(res=>{
       for (var i = 0; i < res.data.length; i++) {
         this.menus.push(res.data[i])
