@@ -43,7 +43,8 @@ module.exports = function (ctx) {
       proxy: {
         // 将所有以/api开头的请求代理到jsonplaceholder
         '/api-system': {
-          target: 'http://192.168.1.106:8111/system',
+          // target: 'http://192.168.1.106:8111/system',
+          target: 'http://127.0.0.1:8201',
           changeOrigin: true,
           pathRewrite: {
             '^/api-system': ''

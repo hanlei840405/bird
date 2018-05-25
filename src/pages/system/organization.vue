@@ -33,44 +33,13 @@
         </q-td>
       </q-table>
     </div>
-    <q-modal v-model="modal.opened" :content-css="{minWidth: '80vw', minHeight: '80vh'}">
-      <q-modal-layout>
-        <q-toolbar slot="header">
-          <q-btn
-            flat
-            round
-            dense
-            v-close-overlay
-            icon="keyboard_arrow_left"
-          />
-          <q-toolbar-title>
-            Header
-          </q-toolbar-title>
-        </q-toolbar>
-
-        <q-toolbar slot="footer">
-          <q-toolbar-title>
-            Footer
-          </q-toolbar-title>
-        </q-toolbar>
-
-        <div class="layout-padding">
-          <h1>Modal</h1>
-
-          <q-btn
-            color="primary"
-            v-close-overlay
-            label="Close"
-          />
-
-          <p>This is a Modal presenting a Layout.</p>
-        </div>
-      </q-modal-layout>
-    </q-modal>
+    <organization-edit ref="editor"></organization-edit>
   </q-page>
 </template>
 
 <script>
+import organizationEdit from './organization_edit.vue'
+
 export default {
   data: () => ({
     organizationTree: [
@@ -109,11 +78,11 @@ export default {
         { name: 'status', label: '状态', field: 'status', format: val => val ? '正常' : '停用' },
         { name: 'action', label: '操作' }
       ]
-    },
-    modal: {
-      opened: false
     }
   }),
+  components: {
+    organizationEdit
+  },
   methods: {
     onLazyLoad ({ node, key, done, fail }) {
       // 如果发生任何错误，调用fail（）
@@ -136,8 +105,7 @@ export default {
       })
     },
     add () {
-      this.modal.opened = true
-      debugger
+      this.$refs.editor.open()
     },
     edit (row) {
       console.log(row)
