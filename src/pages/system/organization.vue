@@ -41,52 +41,58 @@
 import organizationEdit from './organization_edit.vue'
 
 export default {
-  data: () => ({
-    organizationTree: [
-      {
-        id: 1,
-        label: '组织机构',
-        lazy: true,
-        'handler': function (item) {
-          debugger
-          console.log(item)
-        }
-      }
-    ],
-    organizationTable: {
-      filter: '',
-      loading: false,
-      serverPagination: {
-        page: 1,
-        rowsNumber: 10 // 指定这个属性就确定了分页是服务器端的
-      },
-      selection: 'multiple',
-      selected: [],
-      serverData: [],
-      columns: [
+  data () {
+    var _self = this
+    return {
+      organizationTree: [
         {
-          name: 'name',
-          required: true,
-          label: '名称',
-          align: 'left',
-          field: 'name',
-          sortable: true
+          id: 1,
+          label: '组织机构',
+          lazy: true,
+          'handler': function (item) {
+            _self.request({
+              pagination: _self.organizationTable.serverPagination,
+              filter: _self.organizationTable.filter,
+              parentId: item.id
+            })
+          }
+        }
+      ],
+      organizationTable: {
+        filter: '',
+        loading: false,
+        serverPagination: {
+          page: 1,
+          rowsNumber: 10 // 指定这个属性就确定了分页是服务器端的
         },
-        { name: 'code', label: '编号', field: 'code', sortable: true },
-        { name: 'path', label: '路径', field: 'path', sortable: true },
-        { name: 'leaf', label: '是否有下级部门', field: 'leaf', format: val => val ? '否' : '是' },
-        { name: 'status', label: '状态', field: 'status', format: val => val ? '正常' : '停用' },
-        { name: 'action', label: '操作' }
-      ]
+        selection: 'multiple',
+        selected: [],
+        serverData: [],
+        columns: [
+          {
+            name: 'name',
+            required: true,
+            label: '名称',
+            align: 'left',
+            field: 'name',
+            sortable: true
+          },
+          { name: 'code', label: '编号', field: 'code', sortable: true },
+          { name: 'path', label: '路径', field: 'path', sortable: true },
+          { name: 'leaf', label: '是否有下级部门', field: 'leaf', format: val => val ? '否' : '是' },
+          { name: 'status', label: '状态', field: 'status', format: val => val ? '正常' : '停用' },
+          { name: 'action', label: '操作' }
+        ]
+      }
     }
-  }),
+  },
   components: {
     organizationEdit
   },
   methods: {
     onLazyLoad ({ node, key, done, fail }) {
+      var _self = this
       // 如果发生任何错误，调用fail（）
-      debugger
       let id = node.id
       this.$axios.get('api-system/organization/tree/' + id).then(res => {
         let organizations = res.data
@@ -95,9 +101,13 @@ export default {
           array.push({
             'id': item.id,
             'label': item.name,
+            lazy: true,
             'handler': function (item) {
-              debugger
-              console.log(item)
+              _self.request({
+                pagination: _self.organizationTable.serverPagination,
+                filter: _self.organizationTable.filter,
+                parentId: item.id
+              })
             }
           })
         })
@@ -108,7 +118,8 @@ export default {
       this.$refs.editor.open()
     },
     edit (row) {
-      console.log(row)
+      this.$refs.editor.open()
+      this.$refs.editor.setId(row.id)
     },
     request ({ pagination, filter, parentId }) {
       this.$axios.get('api-system/organization/page', {
