@@ -33,7 +33,7 @@
         </q-td>
       </q-table>
     </div>
-    <organization-edit ref="editor"></organization-edit>
+    <organization-edit @noticeParent="onLazyLoad" ref="editor"></organization-edit>
   </q-page>
 </template>
 
@@ -91,6 +91,7 @@ export default {
   },
   methods: {
     onLazyLoad ({ node, key, done, fail }) {
+      debugger
       var _self = this
       // 如果发生任何错误，调用fail（）
       let id = node.id

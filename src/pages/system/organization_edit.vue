@@ -161,8 +161,8 @@ export default {
         return
       }
       this.$axios.post('api-system/organization/save', this.form).then(res => {
-        console.log(res)
         this.opened = false
+        this.$emit('noticeParent')
       })
     }
   }
